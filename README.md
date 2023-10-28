@@ -26,7 +26,7 @@ With the foregoing, the acquisition of the ICP Token by the client is determined
 
 Once the transfer of funds for the acquisition of information from the company/operator, a temporary channel will be created that will expose the corresponding information of the applicant, said information extracted from the private blockchain network.
 
-Continuing with the flow of information transparency, said funds transferred through the NEAR token will continue to be transparent for the client, since they will be in a public network, said protocol was selected, since the cost of transactions is lower. to others such as ETHEREUM, in addition to the use of the Proof Of Stake (PoS) protocol, making transactions per second (TPS) more agile and faster.
+Continuing with the flow of information transparency, said funds transferred through the ICP token will continue to be transparent for the client, since they will be in a public network, said protocol was selected, since the cost of transactions is lower. to others such as ETHEREUM, in addition to the use of the Proof Of Stake (PoS) protocol, making transactions per second (TPS) more agile and faster.
 
 The cost in the transactions of transparency of control figures, may be assumed by the company that will regulate the electronic toll booths, these figures being uploaded in accordance with what is proposed by it, that is, on a weekly or monthly basis, for validation by the the managing companies.
 
