@@ -1,0 +1,97 @@
+
+#### Steps to use ICP-PYTHON --- light client ####
+
+1.- URL:
+
+default URL: https://icp0.app
+localhost: http://localhost:4943
+
+if you will use host = localhost, is necesary to configure this one at the construct Client(url = "http://localhost:4943")
+
+client = Client()
+
+2.- PRIVATE KEY:
+
+path to get PRIVATE - KEY and use it as ident priv-key to init agent construct:
+
+/root/.config/dfx/identity/<identity-name>/identity.pem
+
+from ic.identity import *
+
+pem = """
+-----BEGIN EC PRIVATE KEY-----
+MHQddddCAQEEIGrzylMT4FMYbz9FkZutkMSmS9XP4jXLDV4hdsEEoAzOoAcGBSuBBAAK
+oUQDsQgAEeiHkp2EZofn8vRxvq/s/gHMb18xkqDRqYbAlg5DrdEe6G3MnYx6ty4Dp+
+V6jnnhAdTiBRp6ET/SQG4xOBGjCQ31mXQ==
+-----END EC PRIVATE KEY-----
+"""
+iden = Identity.from_pem(pem)
+
+print("ident-key-type:",iden.key_type)
+print("ident-priv-key:",iden.privkey)
+print("ident-pub-key:",iden.pubkey)
+
+3.- Make a call to ICP Api
+
+/api/v2/canister/<effective_canister_id>/call
+
+canister_id-backend: "bkyz2-fmaaa-aaaaa-qaaaq-cai", 
+method: "greet", 
+arguments: encode([{'type': Types.Text,'value':'vavava'}])
+
+above arguments according the did arg ...
+
+4.- Files to follow to first enhament
+
+ic/agent.py
+test_agent.py
+
+5.- Despite to follow the steps at obvious file test_client.py it response with erro code 400 bad request:
+
+NOTE: I did not have time to continue making some test using directly client.py library ....
+
+Python library used, corb2 and methods loads and dumps(convert to hexa)
+
+reqid = b'\xb3\nU\\F\xf9\x9d\x06\xfa\x15\x1aI\x93S\xa9\x8b\xb2\x8a\x03\xd6BJ},\xa5r=\xa9C\x10v\x98'
+
+JSON to HEXA using CORB2 library:
+
+data = b'\xa3gcontent\xa6lrequest_typeequeryfsenderX\x1d\x819\xde\x9e\xc8\x1dP\xd8b\xa9V\xdd\x95\xe8\xd7\x05\xe4b\xf9\xe8\xdf o\xf4\xfeI\x879\x02\
+kcanister_idJ\x00\x00\x00\x00\x00\xf0\x10\xec\x01\x01\
+kmethod_nameibalanceOf\
+cargX&DIDL\x00\x01h\x01\x1d\x819\xde\x9e\xc8\x1dP\xd8b\xa9V\xdd\x95\xe8\xd7\x05\xe4b\xf9\xe8\xdf o\xf4\xfeI\x879\x02\
+ningress_expiry\x1b\x17\x8d\xc8gTep\x00\
+msender_pubkeyX,0*0\x05\x06\x03+ep\x03!\x00\xec\x17+\x93\xad^V;\xf4\x93,p\xe1$P4\xc3Tg\xef.\xfdMd\xeb\xf8\x19h4g\xe2\xbf\
+jsender_sigX@\xf1K2\x17*\x87\x10UTDu\x12\x98\xa5\xc4\xab\xe7\xc0\x9a\x1a~\x16\xda\x1d\xdcl\x01\xbc\xe0Bi\xde}^\x9c\xcb\x07 \xd89Z\x97A22V\x0b\x0e\xb5\x7f\xe2\x1bcLJt\xea\x1b\xc4\xac\x00\x96\xb4\x02'
+
+ret = client.query(canister_id, data)
+
+print("RESPONSE:",ret)
+
+JSON 
+
+'''
+{
+'content':
+    {'request_type': 'call',
+    'sender': b'\x819\xde\x9e\xc8\x1dP\xd8b\xa9V\xdd\x95\xe8\xd7\x05\xe4b\xf9\xe8\xdf o\xf4\xfeI\x879\x02',
+    'canister_id': b'\x00\x00\x00\x00\x00\xf0\x10\xec\x01\x01',
+    'method_name': 'transfer',
+    'arg': b'DIDL\x00\x02h}\x01\x00\x80\xc8\xaf\xa0%',
+    'ingress_expiry': 163929373000000000000
+    },
+'sender_pubkey': b'0*0\x05\x06\x03+ep\x03!\x00\xec\x17+\x93\xad^V;...Md\xeb\xf8\x19h4g\xe2\xbf',
+'sender_sig': b'\x95\xb0\xde\x98\r9o\x19\xb8+\xc1\xf5\xdb\x0b\x85\xafSoLD...uu\xfa%\x7f`OP\xdd\x03'
+}
+'''
+
+change_json_to_hexa = cbor2.dumps(json)
+data_hexa_to_send = change_json_to_hexa
+ret =  client.query(canister_id,data_hexa_to_send)
+
+if you want to make readable any tags at the json file, you can use:
+
+cad = Principal.from_str()
+print(cad.bytes)
+or
+Principal.from_hex()

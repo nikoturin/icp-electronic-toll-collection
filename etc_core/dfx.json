@@ -1,0 +1,33 @@
+{
+  "canisters": {
+    "etc_icp_db": {
+      "main": "etc_db/src/etc_db.mo",
+      "type": "motoko"
+    },
+    "etc_icp_gtw":{
+      "main": "etc_gtw/src/etc_gtw.mo",
+      "type": "motoko"    
+    },
+    "etc_icp_db_ope1":{
+      "main": "etc_db_ope/src/etc_db_ope1.mo",
+      "type": "motoko"    
+    },
+    "etc_icp_db_ope2":{
+      "main": "etc_db_ope/src/etc_db_ope2.mo",
+      "type": "motoko"    
+    },
+    "etc_icp_db_ope3":{
+      "main": "etc_db_ope/src/etc_db_ope3.mo",
+      "type": "motoko"    
+    },
+    "etc_icp_db_ope4":{
+      "main": "etc_db_ope/src/etc_db_ope4.mo",
+      "type": "motoko"    
+    },
+    "etc_icp_db_job":{
+      "main": "etc_job/src/etc_job.mo",
+      "type": "motoko"    
+    }
+
+  }
+}
